@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://duarhvlaso8sg"]
+
+[ext_resource type="PackedScene" uid="uid://bihpibrsi1p44" path="res://scenes/character.tscn" id="1_im6um"]
+[ext_resource type="Script" path="res://scripts/player_movement_component.gd" id="2_syr5n"]
+
+[node name="Player" groups=["player_group"] instance=ExtResource("1_im6um")]
+collision_mask = 2
+
+[node name="DamageSystem" parent="." index="0"]
+collision_mask = 2
+can_deal_damage = false
+max_health = 1000
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageSystem" index="0"]
+
+[node name="MovementComponent" parent="." index="1"]
+script = ExtResource("2_syr5n")
+acceleration = 2000
+max_speed = 300
+friction = 2000
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
+
+[node name="Camera2D" type="Camera2D" parent="." index="3"]

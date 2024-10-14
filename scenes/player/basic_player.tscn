@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://wawkh5jwyjs4"]
+
+[ext_resource type="PackedScene" uid="uid://duarhvlaso8sg" path="res://scenes/player/player.tscn" id="1_kukau"]
+[ext_resource type="Texture2D" uid="uid://b44hwivmjmsx" path="res://assets/Tilemap/tilemap_packed.png" id="2_52f74"]
+[ext_resource type="Script" path="res://scripts/basic_player.gd" id="2_qu7o7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mme1k"]
+radius = 35.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gvr1e"]
+radius = 31.0
+height = 74.0
+
+[node name="BasicPlayer" instance=ExtResource("1_kukau")]
+script = ExtResource("2_qu7o7")
+
+[node name="CollisionShape2D" parent="DamageSystem" index="0"]
+shape = SubResource("CircleShape2D_mme1k")
+debug_color = Color(0.888448, 0.000271842, 0.79902, 0.42)
+
+[node name="CollisionShape2D" parent="." index="2"]
+shape = SubResource("CapsuleShape2D_gvr1e")
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="4"]
+scale = Vector2(4, 4)
+texture = ExtResource("2_52f74")
+region_enabled = true
+region_rect = Rect2(15.9118, 128.118, 16.0882, 15.8821)

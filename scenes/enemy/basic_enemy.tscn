@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=3 uid="uid://d2sbfppepoyke"]
+
+[ext_resource type="PackedScene" uid="uid://dusb0c2d2hfur" path="res://scenes/enemy/enemy.tscn" id="1_xvbxa"]
+[ext_resource type="Script" path="res://scripts/enemy_state_machine.gd" id="2_6lans"]
+[ext_resource type="Script" path="res://scripts/enemy_move_state.gd" id="2_ecnta"]
+[ext_resource type="Texture2D" uid="uid://b44hwivmjmsx" path="res://assets/Tilemap/tilemap_packed.png" id="2_m63x8"]
+[ext_resource type="Script" path="res://scripts/idle.gd" id="3_i7phg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7ory0"]
+radius = 35.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ag7xs"]
+radius = 370.168
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p6etu"]
+radius = 25.0
+height = 64.0
+
+[node name="BasicEnemy" instance=ExtResource("1_xvbxa")]
+
+[node name="CollisionShape2D" parent="DamageSystem" index="0"]
+shape = SubResource("CircleShape2D_7ory0")
+
+[node name="MovementComponent" parent="." index="1"]
+acceleration = 2000
+max_speed = 200
+friction = 2000
+
+[node name="StateMachine" parent="." index="2" node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_6lans")
+initial_state = NodePath("Idle")
+
+[node name="Move" type="Node2D" parent="StateMachine" index="0" node_paths=PackedStringArray("movement_component")]
+script = ExtResource("2_ecnta")
+movement_component = NodePath("../../MovementComponent")
+
+[node name="Idle" type="Node2D" parent="StateMachine" index="1" node_paths=PackedStringArray("movement_component")]
+script = ExtResource("3_i7phg")
+movement_component = NodePath("../../MovementComponent")
+
+[node name="PlayerDetectRadius" type="Area2D" parent="StateMachine" index="2"]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/PlayerDetectRadius" index="0"]
+shape = SubResource("CircleShape2D_ag7xs")
+debug_color = Color(0.894207, 0.000216588, 0.781898, 0.42)
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="3"]
+scale = Vector2(4, 4)
+texture = ExtResource("2_m63x8")
+region_enabled = true
+region_rect = Rect2(16, 160.943, 16, 15.0574)
+
+[node name="CollisionShape2D" parent="." index="4"]
+shape = SubResource("CapsuleShape2D_p6etu")
+
+[connection signal="body_entered" from="StateMachine/PlayerDetectRadius" to="StateMachine" method="_on_player_detect_radius_body_entered"]
+[connection signal="body_exited" from="StateMachine/PlayerDetectRadius" to="StateMachine" method="_on_player_detect_radius_body_exited"]
