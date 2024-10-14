@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://dusb0c2d2hfur"]
 
-[ext_resource type="PackedScene" uid="uid://bihpibrsi1p44" path="res://scenes/character.tscn" id="1_vj3e1"]
-[ext_resource type="Script" path="res://scripts/state_machine.gd" id="2_1yacf"]
+[ext_resource type="PackedScene" uid="uid://bihpibrsi1p44" path="res://scenes/character.tscn" id="1_8dqig"]
+[ext_resource type="Script" path="res://scripts/state_machine.gd" id="2_ueubk"]
 
-[node name="Enemy" instance=ExtResource("1_vj3e1")]
+[node name="Enemy" instance=ExtResource("1_8dqig")]
 collision_layer = 2
 
 [node name="DamageSystem" parent="." index="0"]
@@ -12,6 +12,6 @@ collision_layer = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageSystem" index="0"]
 
 [node name="StateMachine" type="Node2D" parent="." index="2"]
-script = ExtResource("2_1yacf")
+script = ExtResource("2_ueubk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]

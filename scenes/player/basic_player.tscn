@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://wawkh5jwyjs4"]
 
-[ext_resource type="PackedScene" uid="uid://duarhvlaso8sg" path="res://scenes/player/player.tscn" id="1_kukau"]
+[ext_resource type="PackedScene" uid="uid://duarhvlaso8sg" path="res://scenes/player.tscn" id="1_kukau"]
 [ext_resource type="Texture2D" uid="uid://b44hwivmjmsx" path="res://assets/Tilemap/tilemap_packed.png" id="2_52f74"]
-[ext_resource type="Script" path="res://scripts/basic_player.gd" id="2_qu7o7"]
+[ext_resource type="Script" path="res://scripts/player/basic_player.gd" id="2_qu7o7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mme1k"]
 radius = 35.0

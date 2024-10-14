@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://duarhvlaso8sg"]
 
-[ext_resource type="PackedScene" uid="uid://bihpibrsi1p44" path="res://scenes/character.tscn" id="1_im6um"]
-[ext_resource type="Script" path="res://scripts/player_movement_component.gd" id="2_syr5n"]
+[ext_resource type="PackedScene" uid="uid://bihpibrsi1p44" path="res://scenes/character.tscn" id="1_hyksw"]
+[ext_resource type="Script" path="res://scripts/player/player_movement_component.gd" id="2_ms6ns"]
 
-[node name="Player" groups=["player_group"] instance=ExtResource("1_im6um")]
+[node name="Player" groups=["player_group"] instance=ExtResource("1_hyksw")]
 collision_mask = 2
 
 [node name="DamageSystem" parent="." index="0"]
@@ -14,7 +14,7 @@ max_health = 1000
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageSystem" index="0"]
 
 [node name="MovementComponent" parent="." index="1"]
-script = ExtResource("2_syr5n")
+script = ExtResource("2_ms6ns")
 acceleration = 2000
 max_speed = 300
 friction = 2000

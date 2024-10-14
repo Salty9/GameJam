@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://d2sbfppepoyke"]
 
-[ext_resource type="PackedScene" uid="uid://dusb0c2d2hfur" path="res://scenes/enemy/enemy.tscn" id="1_xvbxa"]
-[ext_resource type="Script" path="res://scripts/enemy_state_machine.gd" id="2_6lans"]
-[ext_resource type="Script" path="res://scripts/enemy_move_state.gd" id="2_ecnta"]
+[ext_resource type="PackedScene" uid="uid://dusb0c2d2hfur" path="res://scenes/enemy.tscn" id="1_xvbxa"]
+[ext_resource type="Script" path="res://scripts/enemy/enemy_state_machine.gd" id="2_6lans"]
+[ext_resource type="Script" path="res://scripts/enemy/enemy_move_state.gd" id="2_ecnta"]
 [ext_resource type="Texture2D" uid="uid://b44hwivmjmsx" path="res://assets/Tilemap/tilemap_packed.png" id="2_m63x8"]
-[ext_resource type="Script" path="res://scripts/idle.gd" id="3_i7phg"]
+[ext_resource type="Script" path="res://scripts/enemy/idle.gd" id="3_i7phg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7ory0"]
 radius = 35.0
