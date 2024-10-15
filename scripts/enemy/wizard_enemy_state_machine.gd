@@ -19,8 +19,7 @@ func _physics_process(delta: float) -> void:
 		return
 	var dist := (player.global_position - global_position).length()
 	
-	if current_state != null:
-		print(current_state.name,dist)
+
 		
 	if current_state == $Idle :
 		if dist < player_detect_radius:
