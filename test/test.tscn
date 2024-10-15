@@ -7,6 +7,8 @@
 
 [node name="BasicPlayer" parent="." instance=ExtResource("1_1uq27")]
 position = Vector2(383, 284)
+collision_layer = 1
 
 [node name="WizardEnemy" parent="." instance=ExtResource("2_lawrl")]
 position = Vector2(823, 306)
+collision_mask = 1

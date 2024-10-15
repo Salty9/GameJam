@@ -28,7 +28,12 @@ animations = [{
 }]
 
 [node name="BasicPlayer" instance=ExtResource("1_kukau")]
+collision_layer = 1
+collision_mask = 18
 script = ExtResource("2_qu7o7")
+
+[node name="DamageSystem" parent="." index="0"]
+max_health = 500
 
 [node name="CollisionShape2D" parent="DamageSystem" index="0"]
 shape = SubResource("CircleShape2D_mme1k")
@@ -42,7 +47,6 @@ shape = SubResource("CapsuleShape2D_gvr1e")
 [node name="DamageSystem" parent="Sword/Pivot/Sprite2D" index="0"]
 collision_layer = 0
 collision_mask = 2
-damage = 100
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="5"]
 scale = Vector2(4, 4)

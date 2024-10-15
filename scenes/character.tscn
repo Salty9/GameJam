@@ -5,6 +5,8 @@
 [ext_resource type="Script" path="res://scripts/movement_component.gd" id="3_jxggc"]
 
 [node name="Character" type="CharacterBody2D"]
+collision_layer = 16
+collision_mask = 16
 script = ExtResource("1_ap8pj")
 
 [node name="DamageSystem" type="Area2D" parent="."]
