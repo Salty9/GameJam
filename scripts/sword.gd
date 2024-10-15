@@ -15,7 +15,7 @@ func _ready()->void:
 func on_cooldown_time_changed():
 	$Timer.wait_time = cooldown_time
 
-func swing()->void:	
+func swing()->void:
 	if $Timer.is_stopped():
 		$AnimationPlayer.play("swing")
 		$Timer.start()
