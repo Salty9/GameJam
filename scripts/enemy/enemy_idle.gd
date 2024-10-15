@@ -5,9 +5,10 @@ extends State
 
 var initial_position:Vector2
 func _ready():
+	super._ready()
 	initial_position = global_position
 	$Timer.timeout.connect(on_timer_timout)
-	super._ready()
+	
 
 
 

@@ -48,6 +48,6 @@ damage = 100
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_ubucs")
 autoplay = "default"
-frame_progress = 0.00547716
+frame_progress = 0.460087
 
 [editable path="Sword"]

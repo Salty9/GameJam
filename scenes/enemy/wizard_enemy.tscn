@@ -4,19 +4,11 @@
 [ext_resource type="Script" path="res://scripts/enemy/wizard_enemy.gd" id="2_r1q5m"]
 [ext_resource type="Texture2D" uid="uid://beatdjq8ei1bh" path="res://assets/Tiles/tile_0111.png" id="3_2vte8"]
 [ext_resource type="Script" path="res://scripts/enemy/wizard_enemy_state_machine.gd" id="3_rw13w"]
-[ext_resource type="Texture2D" path="res://assets/Tiles/tile_0111_2.png" id="4_ddsjc"]
-[ext_resource type="Script" path="res://scripts/state.gd" id="4_qqe11"]
 [ext_resource type="Script" path="res://scripts/enemy/enemy_retreat.gd" id="4_xsxd7"]
+[ext_resource type="Script" path="res://scripts/enemy/wizard_attack.gd" id="5_5eojk"]
 [ext_resource type="Script" path="res://scripts/enemy/enemy_chase.gd" id="6_o7l7v"]
 [ext_resource type="Script" path="res://scripts/enemy/enemy_idle.gd" id="7_3yut7"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_whbdu"]
-radius = 9.0
-height = 20.0
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x1g34"]
-radius = 8.0
-height = 18.0
+[ext_resource type="Texture2D" uid="uid://dnplrugpavet6" path="res://assets/Tiles/tile_0111_2.png" id="9_d5hlt"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dbypq"]
 animations = [{
@@ -25,36 +17,56 @@ animations = [{
 "texture": ExtResource("3_2vte8")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_ddsjc")
+"texture": ExtResource("9_d5hlt")
 }],
 "loop": true,
 "name": &"default",
 "speed": 5.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_whbdu"]
+radius = 34.0
+height = 74.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x1g34"]
+radius = 32.0
+height = 70.0
+
 [node name="WizardEnemy" instance=ExtResource("1_4vfbv")]
 script = ExtResource("2_r1q5m")
 
-[node name="DamageSystem" parent="." index="0"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_dbypq")
+autoplay = "default"
+frame_progress = 0.35337
+
+[node name="DamageSystem" parent="." index="1"]
 max_health = 300
 damage = 100
 
 [node name="CollisionShape2D" parent="DamageSystem" index="0"]
 shape = SubResource("CapsuleShape2D_whbdu")
 
-[node name="MovementComponent" parent="." index="1"]
+[node name="MovementComponent" parent="." index="2"]
 acceleration = 1500
 max_speed = 200
 friction = 2000
 
-[node name="StateMachine" parent="." index="2"]
+[node name="StateMachine" parent="." index="3" node_paths=PackedStringArray("initial_state", "parent_movement_component")]
 script = ExtResource("3_rw13w")
+player_detect_radius = 500.0
+attack_range = 100.0
+retreat_if_exceeds = 300.0
+checkpoint_range = 10.0
+initial_state = NodePath("Idle")
+parent_movement_component = NodePath("../MovementComponent")
 
 [node name="Retreat" type="Node2D" parent="StateMachine" index="0"]
 script = ExtResource("4_xsxd7")
 
 [node name="Attack" type="Node2D" parent="StateMachine" index="1"]
-script = ExtResource("4_qqe11")
+script = ExtResource("5_5eojk")
 
 [node name="Chase" type="Node2D" parent="StateMachine" index="2"]
 script = ExtResource("6_o7l7v")
@@ -64,10 +76,5 @@ script = ExtResource("7_3yut7")
 
 [node name="Timer" type="Timer" parent="StateMachine/Idle" index="0"]
 
-[node name="CollisionShape2D" parent="." index="3"]
+[node name="CollisionShape2D" parent="." index="4"]
 shape = SubResource("CapsuleShape2D_x1g34")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="4"]
-sprite_frames = SubResource("SpriteFrames_dbypq")
-autoplay = "default"
-frame_progress = 0.445237

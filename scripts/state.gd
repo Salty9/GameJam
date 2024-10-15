@@ -7,6 +7,8 @@ extends Node2D
 
 class_name State
 
+var bit_mask:int
+
 var object_movement_component:MovementComponent
 var object:Node2D
 var enabled:bool = false

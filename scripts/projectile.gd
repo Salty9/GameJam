@@ -10,6 +10,7 @@ func _ready()->void:
 
 func launch(normalized_direction:Vector2)->void:
 	$MovementComponent.normalized_dir = normalized_direction
+	look_at(normalized_direction)
 
 func on_area_entered(area:Area2D):
 	super.on_area_entered(area)
