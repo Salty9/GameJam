@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://cq786h652p7po"]
+
+[ext_resource type="PackedScene" uid="uid://behsogqd34pl5" path="res://scenes/projectile.tscn" id="1_cklrp"]
+[ext_resource type="Texture2D" uid="uid://b08visrhebclv" path="res://assets/fireball/FB003.png" id="2_777sn"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_31b8x"]
+radius = 7.0
+
+[node name="Fireball" instance=ExtResource("1_cklrp")]
+collision_layer = 0
+can_take_damage = false
+damage = 50
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_777sn")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(6, -1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_31b8x")
+
+[node name="MovementComponent" parent="." index="2"]
+acceleration = 10000
+max_speed = 500

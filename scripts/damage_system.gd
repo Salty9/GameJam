@@ -26,14 +26,13 @@ var is_dead:bool =false
 var health:int:
 	set(value):
 		var prev_health = health
-		health = min(max(0,health),max_health)
+		health = min(max(0,value),max_health)
 		if prev_health != health:
 			health_changed.emit(health)
 		
 
 
 @export var damage:int
-
 
 func _ready()->void:
 	health = max_health
@@ -64,3 +63,10 @@ func disable()->void:
 	for child in get_children():
 		if child is CollisionShape2D or child is CollisionPolygon2D:
 			child.set_deferred("disabled",true)
+
+func enable()->void:
+	set_physics_process(true)
+	set_process(true)
+	for child in get_children():
+		if child is CollisionShape2D or child is CollisionPolygon2D:
+			child.set_deferred("disabled",false)

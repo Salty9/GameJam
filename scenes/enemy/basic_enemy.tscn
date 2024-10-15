@@ -26,17 +26,16 @@ acceleration = 2000
 max_speed = 200
 friction = 2000
 
-[node name="StateMachine" parent="." index="2" node_paths=PackedStringArray("initial_state")]
+[node name="StateMachine" parent="." index="2" node_paths=PackedStringArray("initial_state", "parent_movement_component")]
 script = ExtResource("2_6lans")
 initial_state = NodePath("Idle")
+parent_movement_component = NodePath("../MovementComponent")
 
-[node name="Move" type="Node2D" parent="StateMachine" index="0" node_paths=PackedStringArray("movement_component")]
+[node name="Move" type="Node2D" parent="StateMachine" index="0"]
 script = ExtResource("2_ecnta")
-movement_component = NodePath("../../MovementComponent")
 
-[node name="Idle" type="Node2D" parent="StateMachine" index="1" node_paths=PackedStringArray("movement_component")]
+[node name="Idle" type="Node2D" parent="StateMachine" index="1"]
 script = ExtResource("3_i7phg")
-movement_component = NodePath("../../MovementComponent")
 
 [node name="PlayerDetectRadius" type="Area2D" parent="StateMachine" index="2"]
 collision_layer = 0

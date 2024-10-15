@@ -1,5 +1,5 @@
 extends CharacterBody2D
-
+class_name Character
 # script should be extended like this:
 # extends "scripts/character.gd"
 
