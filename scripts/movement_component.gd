@@ -35,6 +35,5 @@ func _physics_process(delta):
 	else:
 		parent.global_position += velocity * delta
 		
-	# Clamp the position inside window size
 func disable()->void:
 	set_physics_process(false)

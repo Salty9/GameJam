@@ -26,14 +26,13 @@ var is_dead:bool =false
 var health:int:
 	set(value):
 		var prev_health = health
-		health = min(max(0,health),max_health)
+		health = min(max(0,value),max_health)
 		if prev_health != health:
 			health_changed.emit(health)
 		
 
 
 @export var damage:int
-
 
 func _ready()->void:
 	health = max_health
