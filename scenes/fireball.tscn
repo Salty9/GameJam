@@ -4,21 +4,21 @@
 [ext_resource type="Texture2D" uid="uid://b08visrhebclv" path="res://assets/fireball/FB003.png" id="2_777sn"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_31b8x"]
-radius = 4.0
-height = 16.0
+radius = 7.0
 
 [node name="Fireball" instance=ExtResource("1_cklrp")]
+collision_layer = 0
+can_take_damage = false
 damage = 50
 
-[node name="CollisionShape2D" parent="." index="0"]
-position = Vector2(3, -1)
+[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_777sn")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(6, -1)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_31b8x")
 
-[node name="MovementComponent" parent="." index="1"]
+[node name="MovementComponent" parent="." index="2"]
 acceleration = 10000
-max_speed = 1000
-
-[node name="Sprite2D" type="Sprite2D" parent="." index="2"]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_777sn")
+max_speed = 500
