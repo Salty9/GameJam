@@ -56,6 +56,12 @@ func take_damage(damage_to_be_dealt:int) -> void:
 	if  health == 0 and not is_dead:
 		no_health_remaining.emit()
 		is_dead = true
+	
+	
+func reinitialize()->void:
+	enable()
+	health = max_health
+	is_dead = false
 
 func disable()->void:
 	set_physics_process(false)
