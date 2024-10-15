@@ -39,7 +39,7 @@ script = ExtResource("2_r1q5m")
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_dbypq")
 autoplay = "default"
-frame_progress = 0.35337
+frame_progress = 0.709994
 
 [node name="DamageSystem" parent="." index="1"]
 max_health = 300
@@ -56,8 +56,8 @@ friction = 2000
 [node name="StateMachine" parent="." index="3" node_paths=PackedStringArray("initial_state", "parent_movement_component")]
 script = ExtResource("3_rw13w")
 player_detect_radius = 500.0
-attack_range = 100.0
-retreat_if_exceeds = 300.0
+attack_range = 200.0
+retreat_if_exceeds = 500.0
 checkpoint_range = 10.0
 initial_state = NodePath("Idle")
 parent_movement_component = NodePath("../MovementComponent")
@@ -68,6 +68,9 @@ script = ExtResource("4_xsxd7")
 [node name="Attack" type="Node2D" parent="StateMachine" index="1"]
 script = ExtResource("5_5eojk")
 
+[node name="Timer" type="Timer" parent="StateMachine/Attack" index="0"]
+autostart = true
+
 [node name="Chase" type="Node2D" parent="StateMachine" index="2"]
 script = ExtResource("6_o7l7v")
 
@@ -75,6 +78,7 @@ script = ExtResource("6_o7l7v")
 script = ExtResource("7_3yut7")
 
 [node name="Timer" type="Timer" parent="StateMachine/Idle" index="0"]
+autostart = true
 
 [node name="CollisionShape2D" parent="." index="4"]
 shape = SubResource("CapsuleShape2D_x1g34")
