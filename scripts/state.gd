@@ -7,6 +7,7 @@ extends Node2D
 
 class_name State
 
+var object_movement_component:MovementComponent
 var object:Node2D
 var enabled:bool = false
 

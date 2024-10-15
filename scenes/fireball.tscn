@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cq786h652p7po"]
+
+[ext_resource type="PackedScene" uid="uid://behsogqd34pl5" path="res://scenes/projectile.tscn" id="1_cklrp"]
+[ext_resource type="Texture2D" uid="uid://b08visrhebclv" path="res://assets/fireball/FB003.png" id="2_777sn"]
+
+[node name="Fireball" instance=ExtResource("1_cklrp")]
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="2"]
+texture = ExtResource("2_777sn")

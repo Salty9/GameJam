@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=4 uid="uid://brmtmn3abd8a6"]
+[gd_scene load_steps=8 format=4 uid="uid://brmtmn3abd8a6"]
 
 [ext_resource type="Texture2D" uid="uid://b44hwivmjmsx" path="res://assets/Tilemap/tilemap_packed.png" id="1_8dn0e"]
 [ext_resource type="PackedScene" uid="uid://wawkh5jwyjs4" path="res://scenes/player/basic_player.tscn" id="2_ogcjy"]
 [ext_resource type="PackedScene" uid="uid://d2sbfppepoyke" path="res://scenes/enemy/basic_enemy.tscn" id="3_spln8"]
+[ext_resource type="Texture2D" uid="uid://ctscptct6ifc6" path="res://assets/Tiles/tile_0089.png" id="4_urmwc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mqfj1"]
 texture = ExtResource("1_8dn0e")
@@ -142,6 +143,9 @@ texture = ExtResource("1_8dn0e")
 [sub_resource type="TileSet" id="TileSet_00b2q"]
 sources/0 = SubResource("TileSetAtlasSource_mqfj1")
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_cmey0"]
+radius = 250.0
+
 [node name="Level1" type="Node2D"]
 
 [node name="Tiles" type="Node2D" parent="."]
@@ -156,3 +160,15 @@ position = Vector2(207, 149)
 
 [node name="BasicEnemy" parent="." instance=ExtResource("3_spln8")]
 position = Vector2(704, 132)
+
+[node name="Checkpoints" type="Node2D" parent="."]
+
+[node name="CP1" type="Node2D" parent="Checkpoints"]
+position = Vector2(1992, 404)
+
+[node name="Sprite2D" type="Sprite2D" parent="Checkpoints/CP1"]
+scale = Vector2(3, 3)
+texture = ExtResource("4_urmwc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoints/CP1"]
+shape = SubResource("CircleShape2D_cmey0")

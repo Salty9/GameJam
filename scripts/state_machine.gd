@@ -16,6 +16,8 @@ var current_state:State=null
 
 var parent:Node2D
 
+@export var parent_movement_component:MovementComponent
+
 
 func _ready() ->void:
 	parent = get_parent()
@@ -25,6 +27,7 @@ func _ready() ->void:
 			var child_state :State= child as State
 			child_state.state_exited.connect(on_state_exited)
 			child_state.object = parent
+			child.object_movement_component = parent_movement_component
 			states.append(child_state)
 	if initial_state != null:
 		change_state(initial_state)
