@@ -1,0 +1,105 @@
+[gd_scene load_steps=8 format=3 uid="uid://bkw2wglv6bngr"]
+
+[ext_resource type="Script" path="res://scripts/sword.gd" id="1_ojmtp"]
+[ext_resource type="Texture2D" uid="uid://d174xqnsp0dkx" path="res://assets/Tiles/tile_0104.png" id="3_gf44y"]
+[ext_resource type="Script" path="res://scripts/damage_system.gd" id="3_icmy1"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tku7p"]
+radius = 3.5
+height = 12.5
+
+[sub_resource type="Animation" id="Animation_kani6"]
+resource_name = "swing"
+length = 0.35
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -1.27032, 0.314159, 1.39626, 1.64945, 0.0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/Sprite2D/DamageSystem")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0666667, 0.266667),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"enable"
+}, {
+"args": [],
+"method": &"disable"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_8m7l0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/Sprite2D/DamageSystem")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"disable"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2847w"]
+_data = {
+"RESET": SubResource("Animation_8m7l0"),
+"swing": SubResource("Animation_kani6")
+}
+
+[node name="Sword" type="Node2D"]
+script = ExtResource("1_ojmtp")
+
+[node name="Pivot" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Pivot"]
+scale = Vector2(4, 4)
+texture = ExtResource("3_gf44y")
+offset = Vector2(15, 0)
+flip_h = true
+
+[node name="DamageSystem" type="Area2D" parent="Pivot/Sprite2D"]
+unique_name_in_owner = true
+script = ExtResource("3_icmy1")
+can_take_damage = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/Sprite2D/DamageSystem"]
+position = Vector2(14.75, -3)
+shape = SubResource("CapsuleShape2D_tku7p")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2847w")
+}
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

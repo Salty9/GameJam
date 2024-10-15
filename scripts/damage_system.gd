@@ -64,3 +64,10 @@ func disable()->void:
 	for child in get_children():
 		if child is CollisionShape2D or child is CollisionPolygon2D:
 			child.set_deferred("disabled",true)
+
+func enable()->void:
+	set_physics_process(true)
+	set_process(true)
+	for child in get_children():
+		if child is CollisionShape2D or child is CollisionPolygon2D:
+			child.set_deferred("disabled",false)
