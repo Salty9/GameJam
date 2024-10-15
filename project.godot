@@ -1,3 +1,11 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
 config_version=5
 
 [application]
@@ -65,6 +73,7 @@ act={
 
 2d_physics/layer_1="player"
 2d_physics/layer_2="enemies"
+2d_physics/layer_5="Obstacles and walls"
 
 [rendering]
 
