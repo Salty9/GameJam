@@ -2,6 +2,7 @@ extends "res://scripts/character.gd"
 
 func _ready()->void:
 	$DamageSystem.health_changed.connect(on_health_changed)
+	$DamageSystem.no_health_remaining.connect(die)
 	
 func on_health_changed(new_health:int)->void:
 	$AnimatedSprite2D.material.set_shader_parameter("enabled",true)
