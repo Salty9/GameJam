@@ -16,6 +16,7 @@ func enter():
 	
 	if object_movement_component != null:
 		object_movement_component.normalized_dir = Vector2.ZERO
+	$"../../Stick".visible = true
 	super.enter()
 
 func _ready():
@@ -41,6 +42,12 @@ func launch_fireball():
 	var launch_location:Vector2 = direction * 10
 	var fireball = fireball_scene.instantiate()
 	fireball.global_position = launch_location + global_position
-	fireball.launch(direction)
-	get_tree().root.get_child(0).add_child(fireball)
+	fireball.set_collision_layer_value(3,true)
+	fireball.set_collision_mask_value(1,true)
+	get_tree().get_first_node_in_group("level").add_child(fireball)
 	
+	fireball.launch(direction)
+	
+func exit():
+	$"../../Stick".visible = false
+	super.exit()

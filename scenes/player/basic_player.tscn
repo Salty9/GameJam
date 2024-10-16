@@ -1,10 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://wawkh5jwyjs4"]
+[gd_scene load_steps=12 format=3 uid="uid://wawkh5jwyjs4"]
 
 [ext_resource type="PackedScene" uid="uid://duarhvlaso8sg" path="res://scenes/player.tscn" id="1_kukau"]
 [ext_resource type="Script" path="res://scripts/player/basic_player.gd" id="2_qu7o7"]
 [ext_resource type="Texture2D" uid="uid://1ph1wcb1yxpn" path="res://assets/Tiles/tile_0097.png" id="4_14ahb"]
 [ext_resource type="PackedScene" uid="uid://bkw2wglv6bngr" path="res://scenes/sword.tscn" id="4_bwf32"]
+[ext_resource type="Shader" path="res://shader/flash.gdshader" id="4_xnukm"]
 [ext_resource type="Texture2D" uid="uid://dvc6dfvcork1b" path="res://assets/Tiles/tile_0097_2.png" id="5_6w50l"]
+[ext_resource type="PackedScene" uid="uid://cgt0h7hdcbhjs" path="res://scenes/axe.tscn" id="7_eop85"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mme1k"]
 radius = 35.0
@@ -12,6 +14,11 @@ radius = 35.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gvr1e"]
 radius = 31.0
 height = 74.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_77ggd"]
+shader = ExtResource("4_xnukm")
+shader_parameter/enabled = false
+shader_parameter/frequency = 20.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ubucs"]
 animations = [{
@@ -43,15 +50,19 @@ debug_color = Color(0.888448, 0.000271842, 0.79902, 0.42)
 shape = SubResource("CapsuleShape2D_gvr1e")
 
 [node name="Sword" parent="." index="4" instance=ExtResource("4_bwf32")]
+visible = false
 
 [node name="DamageSystem" parent="Sword/Pivot/Sprite2D" index="0"]
 collision_layer = 0
 collision_mask = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="5"]
+material = SubResource("ShaderMaterial_77ggd")
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_ubucs")
 autoplay = "default"
 frame_progress = 0.460087
+
+[node name="Axe" parent="." index="6" instance=ExtResource("7_eop85")]
 
 [editable path="Sword"]
