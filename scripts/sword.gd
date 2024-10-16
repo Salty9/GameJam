@@ -5,6 +5,8 @@ signal cooldown_time_changed
 		cooldown_time = value
 		cooldown_time_changed.emit()
 
+func on_cooldown_time_changed():
+	$Timer.wait_time = cooldown_time
 
 func _ready()->void:
 	cooldown_time_changed.connect(on_cooldown_time_changed)
@@ -12,8 +14,6 @@ func _ready()->void:
 	on_cooldown_time_changed()
 	
 	
-func on_cooldown_time_changed():
-	$Timer.wait_time = cooldown_time
 
 func swing()->void:
 	if $Timer.is_stopped():
