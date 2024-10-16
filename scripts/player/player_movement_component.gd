@@ -7,6 +7,7 @@ func get_move_direction() -> Vector2:
 	direction.y = Input.get_axis("ui_up","ui_down")
 	return direction.normalized()
 
-func _process(delta:float)->void:
+func _physics_process(delta:float)->void:
 	normalized_dir = get_move_direction()
+	super._physics_process(delta)
 	

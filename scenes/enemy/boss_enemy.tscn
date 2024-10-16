@@ -1,10 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://i00cg68lfiva"]
+[gd_scene load_steps=14 format=3 uid="uid://i00cg68lfiva"]
 
 [ext_resource type="PackedScene" uid="uid://dusb0c2d2hfur" path="res://scenes/enemy.tscn" id="1_qjnmx"]
+[ext_resource type="Script" path="res://scripts/enemy/boss_enemy.gd" id="2_274xt"]
 [ext_resource type="Shader" path="res://shader/attack_cosmetic.gdshader" id="2_ge8vh"]
 [ext_resource type="Texture2D" uid="uid://bulvkvhwxm6x4" path="res://assets/Tiles/tile_0087.png" id="3_qote8"]
 [ext_resource type="Texture2D" uid="uid://lbooro7si3fi" path="res://assets/Tiles/tile_0087_2.png" id="4_4hjo4"]
-[ext_resource type="Script" path="res://scripts/state.gd" id="5_m8p6g"]
+[ext_resource type="Script" path="res://scripts/enemy/boss_enemy_state_machine.gd" id="5_kmdec"]
+[ext_resource type="Script" path="res://scripts/enemy/boss_enemy_charge.gd" id="5_p5yvo"]
+[ext_resource type="Script" path="res://scripts/enemy/boss_enemy_attack.gd" id="6_eyal5"]
+[ext_resource type="PackedScene" uid="uid://cgt0h7hdcbhjs" path="res://scenes/axe.tscn" id="7_d0sn1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jgwgi"]
 resource_local_to_scene = true
@@ -12,6 +16,8 @@ shader = ExtResource("2_ge8vh")
 shader_parameter/origin = Color(0.14902, 0.168627, 0.266667, 1)
 shader_parameter/new = Color(1, 0, 0, 1)
 shader_parameter/enabled = false
+shader_parameter/flash = false
+shader_parameter/frequency = 20.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_e3kod"]
 animations = [{
@@ -35,18 +41,21 @@ height = 108.0
 size = Vector2(96, 90)
 
 [node name="BossEnemy" instance=ExtResource("1_qjnmx")]
+script = ExtResource("2_274xt")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
 material = SubResource("ShaderMaterial_jgwgi")
 scale = Vector2(6, 6)
 sprite_frames = SubResource("SpriteFrames_e3kod")
 autoplay = "default"
-frame_progress = 0.411824
+frame_progress = 0.406646
 
 [node name="DamageSystem" parent="." index="1"]
-max_health = 700
+max_health = 500
+damage = 50
 
 [node name="CollisionShape2D" parent="DamageSystem" index="0"]
+visible = false
 shape = SubResource("CapsuleShape2D_78yn1")
 
 [node name="MovementComponent" parent="." index="2"]
@@ -54,9 +63,47 @@ acceleration = 600
 max_speed = 250
 friction = 1000
 
+[node name="StateMachine" parent="." index="3" node_paths=PackedStringArray("initial_state", "parent_movement_component")]
+script = ExtResource("5_kmdec")
+attack_range = 500
+initial_state = NodePath("Attack")
+parent_movement_component = NodePath("../MovementComponent")
+
 [node name="Charge" type="Node2D" parent="StateMachine" index="0"]
-script = ExtResource("5_m8p6g")
+script = ExtResource("5_p5yvo")
+charge_time = 1.0
+
+[node name="Timer" type="Timer" parent="StateMachine/Charge" index="0"]
+autostart = true
+
+[node name="Attack" type="Node2D" parent="StateMachine" index="1" node_paths=PackedStringArray("axes")]
+script = ExtResource("6_eyal5")
+axes = [NodePath("../../LeftAxe"), NodePath("../../RightAxe")]
+cooldown_time = 5.0
+
+[node name="Timer" type="Timer" parent="StateMachine/Attack" index="0"]
+autostart = true
 
 [node name="CollisionShape2D" parent="." index="4"]
+visible = false
 position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_ojfuj")
+
+[node name="RightAxe" parent="." index="5" instance=ExtResource("7_d0sn1")]
+max_count = 2
+axe_pickup_radius = 100
+cooldown_time = 1.0
+
+[node name="Sprite2D" parent="RightAxe/Pivot" index="0"]
+offset = Vector2(20, 0)
+
+[node name="LeftAxe" parent="." index="6" instance=ExtResource("7_d0sn1")]
+max_count = 2
+axe_pickup_radius = 100
+cooldown_time = 1.0
+
+[node name="Sprite2D" parent="LeftAxe/Pivot" index="0"]
+offset = Vector2(-20, 0)
+
+[editable path="RightAxe"]
+[editable path="LeftAxe"]

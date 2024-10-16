@@ -17,5 +17,7 @@ func _ready()->void:
 
 func swing()->void:
 	if $Timer.is_stopped():
+		GlobalAudioServer.play_audio("res://assets/audio/sword_swing.mp3",global_position)
+		
 		$AnimationPlayer.play("swing")
 		$Timer.start()

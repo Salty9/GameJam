@@ -3,8 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://bihpibrsi1p44" path="res://scenes/character.tscn" id="1_8dqig"]
 [ext_resource type="Script" path="res://scripts/state_machine.gd" id="2_ueubk"]
 
-[node name="Enemy" instance=ExtResource("1_8dqig")]
+[node name="Enemy" groups=["enemy_group"] instance=ExtResource("1_8dqig")]
 collision_layer = 2
+collision_mask = 17
 
 [node name="DamageSystem" parent="." index="0"]
 collision_layer = 2

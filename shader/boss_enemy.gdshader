@@ -3,9 +3,9 @@ shader_type canvas_item;
 uniform bool redEye=false;
 uniform bool flash=false;
 void fragment() {
-	
+
 	vec4 pixelColor = texture(TEXTURE,UV);
-	
+
 	if(flash){
 		if (pixelColor.a > 0.0){
 			COLOR = vec4(1.0,1.0,1.0,1.0);

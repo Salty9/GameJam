@@ -1,10 +1,14 @@
 extends "res://scripts/character.gd"
 
 func _ready()->void:
-	$DamageSystem.health_changed.connect(on_health_changed)
-	$DamageSystem.no_health_remaining.connect(die)
+	super._ready()
+	$DamageSystem.took_damage.connect(on_took_damage)
 	
-func on_health_changed(new_health:int)->void:
+	
+func on_took_damage(damage_taken:int)->void:
+	
+	GlobalAudioServer.play_audio("res://assets/audio/enemy_grunt.wav",global_position)
+	
 	$AnimatedSprite2D.material.set_shader_parameter("enabled",true)
 	await get_tree().create_timer(1).timeout
 	$AnimatedSprite2D.material.set_shader_parameter("enabled",false)

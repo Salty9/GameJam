@@ -4,9 +4,11 @@ extends Node2D
 @export var axe_pickup_radius:int = 50
 
 signal axe_count_changed
-signal thrown(thrown_axe)
+signal thrown(thrown_axe:Projectile)
 
-var thrown_axe=null
+var axe_id:int
+
+var thrown_axes:Array[Projectile]
 
 var throwable_axe_scene:PackedScene = preload("res://scenes/throwable_axe.tscn")
 
@@ -41,18 +43,25 @@ func _ready()->void:
 	if not get_parent().is_in_group("player_group"):
 		$Area2D.set_collision_mask_value(3,true)
 		$Area2D.set_collision_layer_value(4,false)
+		
+	axe_id = name.hash()
+	
 
-func on_axe_area_exited(area:Area2D):
-	thrown_axe = area
+func on_axe_area_exited(area):
+	if area.has_method("get_axe_id") and area.get_axe_id() == axe_id:
+		thrown_axes.append(area)
+
 func on_axe_area_entered(area:Area2D):
-	if thrown_axe == null:
+	if thrown_axes.is_empty():
 		return
-	thrown_axe.destroy()
-	thrown_axe = null
-	axe_count += 1
+	var index := thrown_axes.find(area)
+	if index >= 0:
+		area.destroy()
+		thrown_axes.remove_at(index)
+		axe_count += 1
 
 
-func on_axe_thrown(axe)->void:
+func on_axe_thrown(axe:Projectile)->void:
 	axe_count -= 1
 
 
@@ -66,21 +75,22 @@ func throw(normalized_direction:Vector2):
 	
 	var throwable = throwable_axe_scene.instantiate()
 
-	throwable.global_position = $Pivot/Sprite2D.global_position + $Pivot/Sprite2D.offset
+	throwable.global_position = global_position
+	throwable.id = axe_id
 	
 	get_tree().get_first_node_in_group("level").add_child(throwable)
 	
 	throwable.launch(normalized_direction)
 	
+	var parent = get_parent()
 	
-	
-	if get_parent().is_in_group("player_group"):
+	if parent.is_in_group("player_group"):
 		throwable.set_collision_layer_value(4,true)
 		throwable.set_collision_mask_value(2,true)
 	else:
 		throwable.set_collision_layer_value(3,true)
 		throwable.set_collision_mask_value(1,true)
 		
-	throwable.start(get_parent(),4.0)
+	throwable.start(parent,4.0)
 	thrown.emit(throwable)
 	$Timer.start()

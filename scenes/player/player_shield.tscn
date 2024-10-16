@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=3 uid="uid://byeyfpmrdk423"]
+
+[ext_resource type="Script" path="res://scripts/player/player_shield.gd" id="1_7wpje"]
+[ext_resource type="Texture2D" uid="uid://b44hwivmjmsx" path="res://assets/Tilemap/tilemap_packed.png" id="2_f5b4n"]
+[ext_resource type="Script" path="res://scripts/damage_system.gd" id="3_fyhtm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oag3d"]
+size = Vector2(10.0055, 10.0358)
+
+[sub_resource type="Curve" id="Curve_0tiqx"]
+max_value = 2.0
+_data = [Vector2(0, 1.02928), 0.0, 0.0, 0, 0, Vector2(0.164875, 2), 0.0, 0.0, 0, 0, Vector2(0.996416, 0.0395315), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="PlayerShield" type="Node2D"]
+rotation = -0.00148623
+script = ExtResource("1_7wpje")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(4, 4)
+texture = ExtResource("2_f5b4n")
+offset = Vector2(15, 0)
+region_enabled = true
+region_rect = Rect2(80, 128, 16, 16)
+
+[node name="DamageSystem" type="Area2D" parent="Sprite2D"]
+collision_mask = 2
+script = ExtResource("3_fyhtm")
+can_deal_damage = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/DamageSystem"]
+position = Vector2(15, 0)
+shape = SubResource("RectangleShape2D_oag3d")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Sprite2D"]
+position = Vector2(18.9996, 0.278238)
+scale = Vector2(0.25, 0.25)
+emitting = false
+amount = 100
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+spread = 83.66
+gravity = Vector2(0, 0)
+initial_velocity_min = 26.85
+initial_velocity_max = 201.35
+scale_amount_curve = SubResource("Curve_0tiqx")
+
+[node name="Cosmetic" type="Sprite2D" parent="."]
+position = Vector2(-32, 28)
+rotation = -0.205864
+scale = Vector2(4, 4)
+texture = ExtResource("2_f5b4n")
+region_enabled = true
+region_rect = Rect2(80, 128, 16, 16)
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="DefenseTimer" type="Timer" parent="."]
+one_shot = true

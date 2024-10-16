@@ -13,4 +13,5 @@ func _ready()->void:
 
 # should be overriden with super.die() call at the end
 func die():
+	dead.emit()
 	queue_free()

@@ -1,7 +1,7 @@
 extends DamageSystem
 # script should be overriden with extends "scripts/projectile.gd"
 # player & enemy projectiles should be on separate physics layers
-
+class_name Projectile
 @export var life_time :float = 1
 signal destroyed
 

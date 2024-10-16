@@ -37,3 +37,7 @@ func _physics_process(delta):
 		
 func disable()->void:
 	set_physics_process(false)
+	set_process(false)
+func enable()->void:
+	set_physics_process(true)
+	set_process(false)

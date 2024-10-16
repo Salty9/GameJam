@@ -5,6 +5,11 @@ var coming_back:bool = false
 var character:Character
 var pickup_radius:int = 50
 
+var id:int
+
+func get_axe_id()->int:
+	return id
+
 func _ready()->void:
 	life_time = -1
 	super._ready()
@@ -14,9 +19,11 @@ func start(thrower:Character,total_travel_time:float)->void:
 	character = thrower
 	$TravelTimer.wait_time = total_travel_time / 2.0
 	$TravelTimer.start()
+	
+	GlobalAudioServer.play_audio("res://assets/audio/axe.mp3",global_position)
 
 func _process(delta: float) -> void:
-	$Sprite2D.rotate(PI/4)
+	$Sprite2D.rotate(PI/6)
 
 func _physics_process(delta: float) -> void:
 	
