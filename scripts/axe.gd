@@ -70,7 +70,7 @@ func on_axe_count_changed(_new_value:int):
 
 	
 func throw(normalized_direction:Vector2):
-	if not $Timer.is_stopped():
+	if not $Timer.is_stopped() or axe_count == 0:
 		return
 	
 	var throwable = throwable_axe_scene.instantiate()

@@ -1,4 +1,13 @@
 extends "res://scripts/character.gd"
+
+const tutorial_texts = [
+	"use w, a, s, d to move",
+	"left click to attack",
+	"left-shift to block"
+]
+
+var level2 :bool= false
+
 var accept_input:bool =true
 var enabled_weapon:Node2D:
 	set(value):
@@ -43,7 +52,10 @@ func _process(delta: float) -> void:
 			
 	elif Input.is_action_just_pressed("defend")and accept_input :
 		$PlayerShield.defend()
-	
+	elif Input.is_action_just_pressed("weapon_1") and accept_input and level2:
+		enabled_weapon = $Sword
+	elif Input.is_action_just_pressed("weapon_2") and accept_input and level2:
+		enabled_weapon = $Axe
 
 	$Sword.look_at(get_global_mouse_position())
 	$Sword.scale.y = -1 if $Sword.global_rotation >2 and $Sword.global_rotation >-2 else 1
@@ -62,5 +74,22 @@ func die():
 	enabled_weapon.hide()
 	$PlayerShield.hide()
 	remove_from_group("player_group")
+
+func show_tutorial()->void:
+
+	$Label.show()
 	
-	
+	for tutorial in tutorial_texts:
+		$Label.modulate.a = 1
+		$Label.text = tutorial
+		var tween:Tween = get_tree().create_tween()
+		tween.tween_property($Label,"modulate:a",0,3)
+		await tween.finished
+		
+		
+		tween.stop()
+		
+		await get_tree().create_timer(1).timeout
+		
+		
+	$Label.hide()

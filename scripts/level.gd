@@ -1,12 +1,18 @@
 extends Node2D
-
+signal entering_boss_fight
 var dropped_sword_scene:PackedScene = preload("res://scenes/dropped_sword.tscn")
-var spawn_locations:Array[Marker2D]
+
 
 var checkpoint_count:int=0
 
+@export var boss_scene:PackedScene
+
+var axe_bonus_array:Array[int]=[1]
+
 func _ready()->void:
 	$BasicPlayer.dead.connect(on_player_death)
+	$BasicPlayer.level2 = "2" in name
+	
 	var camera :Camera2D = $BasicPlayer.find_child("Camera2D")
 	
 	camera.limit_left = $BorderMarkers/TopLeft.global_position.x
@@ -18,17 +24,33 @@ func _ready()->void:
 		if child is DamageSystem:
 			checkpoint_count += 1
 			child.statue_broken.connect(on_checkpoint_cleared)
-	for child in $SpawnMarkers.get_children():
-		if child is Marker2D:
-			spawn_locations.append(child)
 			
+			for enemy in child.get_children():
+				if enemy is Character and enemy.is_in_group("enemy_group"):
+					enemy.dead.connect(on_enemy_dead)
+					
+					
+
+	if not $BasicPlayer.level2:
+		$BasicPlayer.show_tutorial()
+		
+func on_enemy_dead()->void:
+	var bonus :int= axe_bonus_array.pick_random()
+	$BasicPlayer.find_child("Axe").max_count += bonus
+	if bonus == 1:
+		axe_bonus_array.append(0)
+	
+	
+	
 func on_checkpoint_cleared()->void:
 	checkpoint_count-=1
 	if checkpoint_count == 0:
 		
 		$BasicPlayer.disable_input()
+		if boss_scene == null:
+			return
+		entering_boss_fight.emit()
 		
-		var boss_scene = load("res://scenes/enemy/boss_enemy.tscn")
 		
 		
 		
@@ -45,8 +67,16 @@ func on_checkpoint_cleared()->void:
 		tween.tween_property(player_camera,"global_position",$BossEnemySpawnMarker.global_position,2)
 		
 		tween.tween_property(player_camera,"global_position",$BasicPlayer.global_position,1)
-		tween.finished.connect(func()->void:$BasicPlayer.enable_input())
-		
+		tween.finished.connect(boss_revealed)
+func boss_revealed()->void:
+	$BasicPlayer.enable_input()
+	for child in get_children():
+		if child is AudioPlayer:
+			child.stop()
+	$AudioStream.stop()
+	$AudioStream.stream = load("res://assets/audio/boss-fight60s.mp3")
+	$AudioStream.play()
+	
 
 func on_player_death()->void:
 	var player_pos :Vector2= $BasicPlayer.global_position
@@ -56,7 +86,7 @@ func on_player_death()->void:
 	#$BasicPlayer.global_position = spawn_locations.pick_random().global_position
 	
 	var tween :Tween = get_tree().create_tween()
-	tween.tween_property($BasicPlayer,"global_position",spawn_locations.pick_random().global_position,2)
+	tween.tween_property($BasicPlayer,"global_position",$SpawnMarker.global_position,2)
 	
 	tween.finished.connect(on_player_respawn)
 	

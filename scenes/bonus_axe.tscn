@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://bdjjl5h8mmrv2"]
+
+[ext_resource type="Script" path="res://scripts/bonus_axe.gd" id="1_amn2c"]
+[ext_resource type="Texture2D" uid="uid://b44hwivmjmsx" path="res://assets/Tilemap/tilemap_packed.png" id="2_ac56i"]
+[ext_resource type="Shader" path="res://shader/item_highlight.gdshader" id="2_g3yin"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_34ts0"]
+radius = 37.0135
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bq0pi"]
+shader = ExtResource("2_g3yin")
+shader_parameter/highlight_color = Color(1, 1, 1, 1)
+shader_parameter/frequency = 2.0
+shader_parameter/highlight_speed = 1.197
+shader_parameter/highlight_width = 3.646
+
+[node name="BonusAxe" type="Area2D"]
+collision_layer = 0
+monitorable = false
+script = ExtResource("1_amn2c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_34ts0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_bq0pi")
+scale = Vector2(4, 4)
+texture = ExtResource("2_ac56i")
+region_enabled = true
+region_rect = Rect2(160, 144, 16, 16)

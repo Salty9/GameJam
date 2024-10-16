@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://wawkh5jwyjs4"]
+[gd_scene load_steps=14 format=3 uid="uid://wawkh5jwyjs4"]
 
 [ext_resource type="PackedScene" uid="uid://duarhvlaso8sg" path="res://scenes/player.tscn" id="1_kukau"]
 [ext_resource type="Script" path="res://scripts/player/basic_player.gd" id="2_qu7o7"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dvc6dfvcork1b" path="res://assets/Tiles/tile_0097_2.png" id="5_6w50l"]
 [ext_resource type="PackedScene" uid="uid://byeyfpmrdk423" path="res://scenes/player/player_shield.tscn" id="7_615f2"]
 [ext_resource type="PackedScene" uid="uid://cgt0h7hdcbhjs" path="res://scenes/axe.tscn" id="7_eop85"]
+[ext_resource type="FontFile" uid="uid://d3sf1su1avyn" path="res://assets/font/kenney_mini_square.ttf" id="9_j670n"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mme1k"]
 radius = 35.0
@@ -66,7 +67,22 @@ damage = 250
 
 [node name="Axe" parent="." index="6" instance=ExtResource("7_eop85")]
 visible = false
+max_count = 5
 
 [node name="PlayerShield" parent="." index="7" instance=ExtResource("7_615f2")]
+
+[node name="Label" type="Label" parent="." index="8"]
+visible = false
+offset_left = -126.0
+offset_top = 54.0
+offset_right = 126.0
+offset_bottom = 99.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_j670n")
+theme_override_font_sizes/font_size = 32
+text = "asdkljgfasdgf"
+horizontal_alignment = 1
 
 [editable path="Sword"]
