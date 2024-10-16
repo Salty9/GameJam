@@ -9,10 +9,7 @@
 [ext_resource type="Script" path="res://scripts/enemy/wizard_attack.gd" id="5_5eojk"]
 [ext_resource type="Script" path="res://scripts/enemy/enemy_chase.gd" id="6_o7l7v"]
 [ext_resource type="Script" path="res://scripts/enemy/enemy_idle.gd" id="7_3yut7"]
-<<<<<<< Updated upstream
 [ext_resource type="Texture2D" uid="uid://dnplrugpavet6" path="res://assets/Tiles/tile_0111_2.png" id="9_d5hlt"]
-=======
-[ext_resource type="Texture2D" uid="uid://dsq1ye2n1d4i2" path="res://assets/Tiles/tile_0111_2.png" id="9_d5hlt"]
 [ext_resource type="Texture2D" uid="uid://b44hwivmjmsx" path="res://assets/Tilemap/tilemap_packed.png" id="11_rctn5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yf5w4"]
@@ -20,7 +17,6 @@ resource_local_to_scene = true
 shader = ExtResource("3_20g58")
 shader_parameter/enabled = false
 shader_parameter/frequency = 20.0
->>>>>>> Stashed changes
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dbypq"]
 animations = [{
