@@ -25,10 +25,12 @@ var is_dead:bool =false
 
 var health:int:
 	set(value):
-		var prev_health = health
-		health = min(max(0,value),max_health)
-		if prev_health != health:
-			health_changed.emit(health)
+		
+		var new_health = min(max(0,value),max_health)
+		if new_health != health:
+			
+			health_changed.emit(new_health)
+			health = new_health
 		
 
 
@@ -44,7 +46,7 @@ func _ready()->void:
 func on_area_entered(area:Area2D)->void:
 	if not area is DamageSystem:
 		return
-	if can_deal_damage:
+	if can_deal_damage and area.can_take_damage:
 		area.take_damage(damage)
 	
 func take_damage(damage_to_be_dealt:int) -> void:
@@ -56,6 +58,12 @@ func take_damage(damage_to_be_dealt:int) -> void:
 	if  health == 0 and not is_dead:
 		no_health_remaining.emit()
 		is_dead = true
+	
+	
+func reinitialize()->void:
+	enable()
+	health = max_health
+	is_dead = false
 
 func disable()->void:
 	set_physics_process(false)
