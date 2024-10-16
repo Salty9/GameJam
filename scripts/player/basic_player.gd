@@ -1,10 +1,5 @@
 extends "res://scripts/character.gd"
 
-const tutorial_texts = [
-	"use w, a, s, d to move",
-	"left click to attack",
-	"left-shift to block"
-]
 
 var level2 :bool= false
 
@@ -78,10 +73,11 @@ func die():
 func show_tutorial()->void:
 
 	$Label.show()
-	
-	for tutorial in tutorial_texts:
+	var json_string = FileAccess.get_file_as_string("res://data/tutorial.json")
+	for tutorial in JSON.parse_string(json_string):
 		$Label.modulate.a = 1
 		$Label.text = tutorial
+		await get_tree().create_timer(1).timeout
 		var tween:Tween = get_tree().create_tween()
 		tween.tween_property($Label,"modulate:a",0,3)
 		await tween.finished
