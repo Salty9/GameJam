@@ -1,0 +1,62 @@
+[gd_scene load_steps=10 format=3 uid="uid://i00cg68lfiva"]
+
+[ext_resource type="PackedScene" uid="uid://dusb0c2d2hfur" path="res://scenes/enemy.tscn" id="1_qjnmx"]
+[ext_resource type="Shader" path="res://shader/attack_cosmetic.gdshader" id="2_ge8vh"]
+[ext_resource type="Texture2D" uid="uid://bulvkvhwxm6x4" path="res://assets/Tiles/tile_0087.png" id="3_qote8"]
+[ext_resource type="Texture2D" uid="uid://lbooro7si3fi" path="res://assets/Tiles/tile_0087_2.png" id="4_4hjo4"]
+[ext_resource type="Script" path="res://scripts/state.gd" id="5_m8p6g"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jgwgi"]
+resource_local_to_scene = true
+shader = ExtResource("2_ge8vh")
+shader_parameter/origin = Color(0.14902, 0.168627, 0.266667, 1)
+shader_parameter/new = Color(1, 0, 0, 1)
+shader_parameter/enabled = false
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e3kod"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_qote8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_4hjo4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_78yn1"]
+radius = 50.0
+height = 108.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ojfuj"]
+size = Vector2(96, 90)
+
+[node name="BossEnemy" instance=ExtResource("1_qjnmx")]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
+material = SubResource("ShaderMaterial_jgwgi")
+scale = Vector2(6, 6)
+sprite_frames = SubResource("SpriteFrames_e3kod")
+autoplay = "default"
+frame_progress = 0.411824
+
+[node name="DamageSystem" parent="." index="1"]
+max_health = 700
+
+[node name="CollisionShape2D" parent="DamageSystem" index="0"]
+shape = SubResource("CapsuleShape2D_78yn1")
+
+[node name="MovementComponent" parent="." index="2"]
+acceleration = 600
+max_speed = 250
+friction = 1000
+
+[node name="Charge" type="Node2D" parent="StateMachine" index="0"]
+script = ExtResource("5_m8p6g")
+
+[node name="CollisionShape2D" parent="." index="4"]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_ojfuj")

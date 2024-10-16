@@ -50,11 +50,11 @@ debug_color = Color(0.888448, 0.000271842, 0.79902, 0.42)
 shape = SubResource("CapsuleShape2D_gvr1e")
 
 [node name="Sword" parent="." index="4" instance=ExtResource("4_bwf32")]
-visible = false
 
 [node name="DamageSystem" parent="Sword/Pivot/Sprite2D" index="0"]
 collision_layer = 0
 collision_mask = 2
+damage = 250
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="5"]
 material = SubResource("ShaderMaterial_77ggd")
@@ -64,5 +64,6 @@ autoplay = "default"
 frame_progress = 0.460087
 
 [node name="Axe" parent="." index="6" instance=ExtResource("7_eop85")]
+visible = false
 
 [editable path="Sword"]
