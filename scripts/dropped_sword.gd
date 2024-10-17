@@ -16,5 +16,6 @@ func _ready()->void:
 
 	
 func on_body_entered(body:CharacterBody2D)->void:
+	GlobalAudioServer.play_audio("res://assets/audio/Pickup.wav",global_position)
 	sword_picked_up.emit()
 	queue_free()

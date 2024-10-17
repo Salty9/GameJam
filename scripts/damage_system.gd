@@ -10,7 +10,9 @@ signal health_changed(new_health:int)
 signal took_damage(damage_taken:int)
 signal no_health_remaining
 
+var health_bar_scene:PackedScene = preload("res://scenes/health_bar.tscn")
 
+var health_bar:ProgressBar
 var is_dead:bool =false
 
 @export var can_take_damage:bool=true:
@@ -22,9 +24,9 @@ var is_dead:bool =false
 		monitoring = value
 		can_deal_damage = value
 
-@export var max_health :int
+@export var max_health :float
 
-var health:int:
+var health:float:
 	set(value):
 		
 		var new_health = min(max(0,value),max_health)
@@ -32,16 +34,31 @@ var health:int:
 			
 			health_changed.emit(new_health)
 			health = new_health
+			if health_bar != null:
+				health_bar.visible = health != max_health
+				health_bar.value = health/max_health * 100.0
+
 		
 
 
 @export var damage:int
 
 func _ready()->void:
-	health = max_health
+	
 	area_entered.connect(on_area_entered)
 	monitorable = can_take_damage
 	monitoring = can_deal_damage
+	
+	for child in get_children():
+		if child is Marker2D:
+			
+			health_bar = health_bar_scene.instantiate()
+			health_bar.position = child.position
+			call_deferred("add_child",health_bar)
+			
+			break
+	health = max_health
+
 
 
 func on_area_entered(area:Area2D)->void:
@@ -59,6 +76,7 @@ func take_damage(damage_to_be_dealt:int) -> void:
 	if  health == 0 and not is_dead:
 		no_health_remaining.emit()
 		is_dead = true
+	
 	
 	
 func reinitialize()->void:

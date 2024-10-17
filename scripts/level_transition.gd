@@ -2,7 +2,7 @@ extends Control
 
 signal key_pressed
 var tween:Tween
-var continued:bool = false
+var continued:bool = true
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept") and not continued:
 		key_pressed.emit()
@@ -12,8 +12,6 @@ func _process(delta: float) -> void:
 			tween.stop()
 			tween.kill()
 
-func _ready()->void:
-	modulate.a = 0
 	
 
 func show_transition()->void:

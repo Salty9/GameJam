@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://bqewhyjwbthlf"]
+
+[ext_resource type="PackedScene" uid="uid://wawkh5jwyjs4" path="res://scenes/player/basic_player.tscn" id="1_qngsh"]
+[ext_resource type="Script" path="res://scripts/basic_player_2.gd" id="2_60mou"]
+[ext_resource type="Texture2D" uid="uid://1ph1wcb1yxpn" path="res://assets/Tiles/tile_0097.png" id="3_4kom6"]
+[ext_resource type="Texture2D" uid="uid://dvc6dfvcork1b" path="res://assets/Tiles/tile_0097_2.png" id="4_uqac4"]
+[ext_resource type="PackedScene" uid="uid://cgt0h7hdcbhjs" path="res://scenes/axe.tscn" id="5_3ukmp"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8rycb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_4kom6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_uqac4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="BasicPlayer2" instance=ExtResource("1_qngsh")]
+script = ExtResource("2_60mou")
+
+[node name="DamageSystem" parent="." index="0"]
+max_health = 1000.0
+
+[node name="AnimatedSprite2D" parent="." index="4"]
+sprite_frames = SubResource("SpriteFrames_8rycb")
+frame_progress = 0.0475134
+
+[node name="DamageSystem" parent="Sword/Pivot/Sprite2D" index="0"]
+damage = 300
+
+[node name="Axe" parent="." index="7" instance=ExtResource("5_3ukmp")]
+visible = false
+
+[editable path="Sword"]

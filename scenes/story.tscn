@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c7h3f7n2w2lan"]
 
-[ext_resource type="Script" path="res://scripts/main_control.gd" id="1_fwkbf"]
+[ext_resource type="Script" path="res://scripts/story.gd" id="1_fwkbf"]
 [ext_resource type="FontFile" uid="uid://d3sf1su1avyn" path="res://assets/font/kenney_mini_square.ttf" id="2_sgwtp"]
 [ext_resource type="AudioStream" uid="uid://c1eoc2m8idipb" path="res://assets/audio/story-bgm.mp3" id="3_sdpji"]
 

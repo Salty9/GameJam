@@ -2,18 +2,18 @@ extends Node2D
 signal entering_boss_fight
 var dropped_sword_scene:PackedScene = preload("res://scenes/dropped_sword.tscn")
 
-
+signal level_complete
 var checkpoint_count:int=0
 
 @export var boss_scene:PackedScene
 
-var axe_bonus_array:Array[int]=[1]
+@export var player:Character
 
 func _ready()->void:
-	$BasicPlayer.dead.connect(on_player_death)
-	$BasicPlayer.level2 = "2" in name
+	player.dead.connect(on_player_death)
+
 	
-	var camera :Camera2D = $BasicPlayer.find_child("Camera2D")
+	var camera :Camera2D = player.find_child("Camera2D")
 	
 	camera.limit_left = $BorderMarkers/TopLeft.global_position.x
 	camera.limit_right = $BorderMarkers/TopRight.global_position.x
@@ -25,29 +25,14 @@ func _ready()->void:
 			checkpoint_count += 1
 			child.statue_broken.connect(on_checkpoint_cleared)
 			
-			for enemy in child.get_children():
-				if enemy is Character and enemy.is_in_group("enemy_group"):
-					enemy.dead.connect(on_enemy_dead)
-					
-					
 
-	if not $BasicPlayer.level2:
-		$BasicPlayer.show_tutorial()
-		
-func on_enemy_dead()->void:
-	var bonus :int= axe_bonus_array.pick_random()
-	$BasicPlayer.find_child("Axe").max_count += bonus
-	if bonus == 1:
-		axe_bonus_array.append(0)
-	
-	
-	
 func on_checkpoint_cleared()->void:
 	checkpoint_count-=1
 	if checkpoint_count == 0:
 		
-		$BasicPlayer.disable_input()
+		player.disable_input()
 		if boss_scene == null:
+			level_complete.emit()
 			return
 		entering_boss_fight.emit()
 		
@@ -58,18 +43,18 @@ func on_checkpoint_cleared()->void:
 		boss_enemy.global_position = $BossEnemySpawnMarker.global_position
 		
 		
-		
+		boss_enemy.dead.connect(on_boss_dead)
 		call_deferred("add_child",boss_enemy)
 		
 		
-		var player_camera:Camera2D = $BasicPlayer.find_child("Camera2D")
+		var player_camera:Camera2D = player.find_child("Camera2D")
 		var tween:Tween = get_tree().create_tween()
 		tween.tween_property(player_camera,"global_position",$BossEnemySpawnMarker.global_position,2)
-		
-		tween.tween_property(player_camera,"global_position",$BasicPlayer.global_position,1)
+		tween.tween_interval(1)
+		tween.tween_property(player_camera,"global_position",player.global_position,1)
 		tween.finished.connect(boss_revealed)
 func boss_revealed()->void:
-	$BasicPlayer.enable_input()
+	player.enable_input()
 	for child in get_children():
 		if child is AudioPlayer:
 			child.stop()
@@ -79,14 +64,14 @@ func boss_revealed()->void:
 	
 
 func on_player_death()->void:
-	var player_pos :Vector2= $BasicPlayer.global_position
+	var player_pos :Vector2= player.global_position
 	
-	$BasicPlayer.accept_input = false
-	$BasicPlayer.hide()
-	#$BasicPlayer.global_position = spawn_locations.pick_random().global_position
+	player.accept_input = false
+	player.hide()
+	#player.global_position = spawn_locations.pick_random().global_position
 	
 	var tween :Tween = get_tree().create_tween()
-	tween.tween_property($BasicPlayer,"global_position",$SpawnMarker.global_position,2)
+	tween.tween_property(player,"global_position",$SpawnMarker.global_position,2)
 	
 	tween.finished.connect(on_player_respawn)
 	
@@ -98,15 +83,18 @@ func on_player_death()->void:
 
 
 func on_player_respawn()->void:
-	$BasicPlayer.show()
-	$BasicPlayer.find_child("MovementComponent").enable()
+	player.show()
+	player.find_child("MovementComponent").enable()
 
 
 
 func on_player_sword_picked_up()->void:
-	$BasicPlayer.add_to_group("player_group")
-	if $BasicPlayer.enabled_weapon != null:
-		$BasicPlayer.enabled_weapon.show()
-	$BasicPlayer.find_child("PlayerShield").show()
-	$BasicPlayer.find_child("DamageSystem").reinitialize()
-	$BasicPlayer.accept_input = true
+	player.add_to_group("player_group")
+	if player.enabled_weapon != null:
+		player.enabled_weapon.show()
+	player.find_child("PlayerShield").show()
+	player.find_child("DamageSystem").reinitialize()
+	player.accept_input = true
+
+func on_boss_dead()->void:
+	level_complete.emit()

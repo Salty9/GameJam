@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cgyp7d3vqlvam"]
+[gd_scene load_steps=5 format=3 uid="uid://cgyp7d3vqlvam"]
 
 [ext_resource type="Script" path="res://scripts/checkpoint.gd" id="1_5j2sv"]
 [ext_resource type="Texture2D" uid="uid://b44hwivmjmsx" path="res://assets/Tilemap/tilemap_packed.png" id="2_2rxh6"]
+[ext_resource type="Texture2D" uid="uid://dn2x04ajcone1" path="res://assets/red_pointer.png" id="3_wdtdr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8ao42"]
 size = Vector2(48, 48)
@@ -11,7 +12,7 @@ collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_5j2sv")
 can_deal_damage = false
-max_health = 400
+max_health = 400.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
@@ -23,3 +24,11 @@ region_rect = Rect2(112, 0, 16, 16)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource("RectangleShape2D_8ao42")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(-45, -47)
+
+[node name="Pointer" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -104)
+texture = ExtResource("3_wdtdr")

@@ -3,9 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://b44hwivmjmsx" path="res://assets/Tilemap/tilemap_packed.png" id="1_8dn0e"]
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_jtc82"]
 [ext_resource type="PackedScene" uid="uid://chvrh40hdb8ek" path="res://scenes/spawn_zone.tscn" id="2_7ufdc"]
-[ext_resource type="PackedScene" uid="uid://wawkh5jwyjs4" path="res://scenes/player/basic_player.tscn" id="2_ogcjy"]
 [ext_resource type="PackedScene" uid="uid://jycdgt20k3qd" path="res://scenes/enemy/wizard_enemy.tscn" id="5_elxo5"]
 [ext_resource type="PackedScene" uid="uid://cgyp7d3vqlvam" path="res://scenes/checkpoint.tscn" id="6_3uvbw"]
+[ext_resource type="PackedScene" uid="uid://du64rbmke4nib" path="res://scenes/player/basic_player_1.tscn" id="7_d28n4"]
 [ext_resource type="AudioStream" uid="uid://hwd1lnptjl2t" path="res://assets/audio/BGM.mp3" id="7_gtehs"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mqfj1"]
@@ -182,8 +182,9 @@ physics_layer_0/collision_layer = 16
 physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_mqfj1")
 
-[node name="Level1" type="Node2D" groups=["level"]]
+[node name="Level1" type="Node2D" node_paths=PackedStringArray("player") groups=["level"]]
 script = ExtResource("1_jtc82")
+player = NodePath("BasicPlayer1")
 
 [node name="Tiles" type="Node2D" parent="."]
 scale = Vector2(3, 3)
@@ -194,9 +195,6 @@ tile_set = SubResource("TileSet_00b2q")
 
 [node name="Spawn zone" parent="Tiles" instance=ExtResource("2_7ufdc")]
 position = Vector2(0, 40)
-
-[node name="BasicPlayer" parent="." instance=ExtResource("2_ogcjy")]
-position = Vector2(2007, 1909)
 
 [node name="Checkpoints" type="Node2D" parent="."]
 
@@ -233,20 +231,8 @@ position = Vector2(-148, 267)
 [node name="CheckpointStatue3" parent="Checkpoints" instance=ExtResource("6_3uvbw")]
 position = Vector2(72, 144)
 
-[node name="WizardEnemy" parent="Checkpoints/CheckpointStatue3" instance=ExtResource("5_elxo5")]
-position = Vector2(-272, -11)
-collision_mask = 1
-
-[node name="WizardEnemy2" parent="Checkpoints/CheckpointStatue3" instance=ExtResource("5_elxo5")]
-position = Vector2(-131, 260)
-collision_mask = 1
-
-[node name="WizardEnemy3" parent="Checkpoints/CheckpointStatue3" instance=ExtResource("5_elxo5")]
-position = Vector2(87, 244)
-collision_mask = 1
-
 [node name="WizardEnemy5" parent="Checkpoints/CheckpointStatue3" instance=ExtResource("5_elxo5")]
-position = Vector2(90, -137)
+position = Vector2(264, 55)
 collision_mask = 1
 
 [node name="BorderMarkers" type="Node2D" parent="."]
@@ -269,7 +255,10 @@ position = Vector2(1472, 280)
 [node name="SpawnMarker" type="Marker2D" parent="."]
 position = Vector2(2012, 1918)
 
-[node name="BGM" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_gtehs")
 volume_db = -20.129
 autoplay = true
+
+[node name="BasicPlayer1" parent="." instance=ExtResource("7_d28n4")]
+position = Vector2(2015, 1857)

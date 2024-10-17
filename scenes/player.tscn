@@ -9,7 +9,6 @@ collision_mask = 2
 [node name="DamageSystem" parent="." index="0"]
 collision_mask = 2
 can_deal_damage = false
-max_health = 1000
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageSystem" index="0"]
 

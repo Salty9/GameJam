@@ -1,14 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://wawkh5jwyjs4"]
+[gd_scene load_steps=9 format=3 uid="uid://wawkh5jwyjs4"]
 
 [ext_resource type="PackedScene" uid="uid://duarhvlaso8sg" path="res://scenes/player.tscn" id="1_kukau"]
 [ext_resource type="Script" path="res://scripts/player/basic_player.gd" id="2_qu7o7"]
-[ext_resource type="Texture2D" uid="uid://1ph1wcb1yxpn" path="res://assets/Tiles/tile_0097.png" id="4_14ahb"]
 [ext_resource type="PackedScene" uid="uid://bkw2wglv6bngr" path="res://scenes/sword.tscn" id="4_bwf32"]
 [ext_resource type="Shader" path="res://shader/flash.gdshader" id="4_xnukm"]
-[ext_resource type="Texture2D" uid="uid://dvc6dfvcork1b" path="res://assets/Tiles/tile_0097_2.png" id="5_6w50l"]
 [ext_resource type="PackedScene" uid="uid://byeyfpmrdk423" path="res://scenes/player/player_shield.tscn" id="7_615f2"]
-[ext_resource type="PackedScene" uid="uid://cgt0h7hdcbhjs" path="res://scenes/axe.tscn" id="7_eop85"]
-[ext_resource type="FontFile" uid="uid://d3sf1su1avyn" path="res://assets/font/kenney_mini_square.ttf" id="9_j670n"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mme1k"]
 radius = 35.0
@@ -21,31 +17,17 @@ shader = ExtResource("4_xnukm")
 shader_parameter/enabled = false
 shader_parameter/frequency = 20.0
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_ubucs"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("4_14ahb")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_6w50l")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
 [node name="BasicPlayer" instance=ExtResource("1_kukau")]
 collision_layer = 1
 collision_mask = 18
 script = ExtResource("2_qu7o7")
 
-[node name="DamageSystem" parent="." index="0"]
-max_health = 500
-
 [node name="CollisionShape2D" parent="DamageSystem" index="0"]
 shape = SubResource("CircleShape2D_mme1k")
 debug_color = Color(0.888448, 0.000271842, 0.79902, 0.42)
+
+[node name="Marker2D" type="Marker2D" parent="DamageSystem" index="1"]
+position = Vector2(-64, -64)
 
 [node name="CollisionShape2D" parent="." index="2"]
 position = Vector2(2, 2)
@@ -54,9 +36,7 @@ shape = SubResource("RectangleShape2D_ujukf")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="4"]
 material = SubResource("ShaderMaterial_77ggd")
 scale = Vector2(4, 4)
-sprite_frames = SubResource("SpriteFrames_ubucs")
 autoplay = "default"
-frame_progress = 0.460087
 
 [node name="Sword" parent="." index="5" instance=ExtResource("4_bwf32")]
 
@@ -65,24 +45,6 @@ collision_layer = 0
 collision_mask = 18
 damage = 250
 
-[node name="Axe" parent="." index="6" instance=ExtResource("7_eop85")]
-visible = false
-max_count = 5
-
-[node name="PlayerShield" parent="." index="7" instance=ExtResource("7_615f2")]
-
-[node name="Label" type="Label" parent="." index="8"]
-visible = false
-offset_left = -126.0
-offset_top = 54.0
-offset_right = 126.0
-offset_bottom = 99.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("9_j670n")
-theme_override_font_sizes/font_size = 32
-text = "asdkljgfasdgf"
-horizontal_alignment = 1
+[node name="PlayerShield" parent="." index="6" instance=ExtResource("7_615f2")]
 
 [editable path="Sword"]

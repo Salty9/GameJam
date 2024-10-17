@@ -4,12 +4,12 @@
 [ext_resource type="PackedScene" uid="uid://i00cg68lfiva" path="res://scenes/enemy/boss_enemy.tscn" id="2_6eby5"]
 [ext_resource type="Texture2D" uid="uid://b44hwivmjmsx" path="res://assets/Tilemap/tilemap_packed.png" id="2_032qi"]
 [ext_resource type="PackedScene" uid="uid://chvrh40hdb8ek" path="res://scenes/spawn_zone.tscn" id="3_47ja7"]
-[ext_resource type="PackedScene" uid="uid://wawkh5jwyjs4" path="res://scenes/player/basic_player.tscn" id="4_fv8f1"]
 [ext_resource type="PackedScene" uid="uid://jycdgt20k3qd" path="res://scenes/enemy/wizard_enemy.tscn" id="5_226sq"]
 [ext_resource type="PackedScene" uid="uid://cgyp7d3vqlvam" path="res://scenes/checkpoint.tscn" id="5_vpj47"]
 [ext_resource type="Script" path="res://scripts/supply_spawner.gd" id="8_2tq2v"]
 [ext_resource type="PackedScene" uid="uid://bdjjl5h8mmrv2" path="res://scenes/bonus_axe.tscn" id="9_kjfnd"]
 [ext_resource type="AudioStream" uid="uid://hwd1lnptjl2t" path="res://assets/audio/BGM.mp3" id="10_jfpr2"]
+[ext_resource type="PackedScene" uid="uid://bqewhyjwbthlf" path="res://scenes/player/basic_player_2.tscn" id="10_t41g4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mqfj1"]
 texture = ExtResource("2_032qi")
@@ -195,9 +195,10 @@ physics_layer_0/collision_layer = 16
 physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_mqfj1")
 
-[node name="Level2" type="Node2D" groups=["level"]]
+[node name="Level2" type="Node2D" node_paths=PackedStringArray("player") groups=["level"]]
 script = ExtResource("1_g7iyk")
 boss_scene = ExtResource("2_6eby5")
+player = NodePath("BasicPlayer2")
 
 [node name="Tiles" type="Node2D" parent="."]
 scale = Vector2(3, 3)
@@ -207,10 +208,6 @@ tile_map_data = PackedByteArray("AADz//r/AAAAAAEAAADz//v/AAADAAUAAADz//z/AAAAAAA
 tile_set = SubResource("TileSet_00b2q")
 
 [node name="Spawn zone" parent="Tiles" instance=ExtResource("3_47ja7")]
-
-[node name="BasicPlayer" parent="." instance=ExtResource("4_fv8f1")]
-position = Vector2(2083, 1783)
-metadata/_edit_group_ = true
 
 [node name="Checkpoints" type="Node2D" parent="."]
 
@@ -312,9 +309,12 @@ position = Vector2(-321, 1802)
 position = Vector2(549, 1442)
 
 [node name="SpawnMarker" type="Marker2D" parent="."]
-position = Vector2(2024, 1956)
+position = Vector2(2014, 1836)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_jfpr2")
 volume_db = -20.0
 autoplay = true
+
+[node name="BasicPlayer2" parent="." instance=ExtResource("10_t41g4")]
+position = Vector2(2021, 1869)

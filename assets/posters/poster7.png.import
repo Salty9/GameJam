@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chvk176aog6ag"
-path="res://.godot/imported/poster8(final_scene).png-b44129d696c77e80fcbc6dd88194851c.ctex"
+uid="uid://cv2l07h1oab82"
+path="res://.godot/imported/poster7.png-148c0edb51995adf68262d9071417ccd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://test/poster8(final_scene).png"
-dest_files=["res://.godot/imported/poster8(final_scene).png-b44129d696c77e80fcbc6dd88194851c.ctex"]
+source_file="res://assets/posters/poster7.png"
+dest_files=["res://.godot/imported/poster7.png-148c0edb51995adf68262d9071417ccd.ctex"]
 
 [params]
 

@@ -10,5 +10,5 @@ func on_body_entered(body)->void:
 		if axe != null:
 			axe.max_count += 1
 			axe.axe_count += 1
-		
+		GlobalAudioServer.play_audio("res://assets/audio/Pickup.wav",global_position)
 		queue_free()

@@ -51,11 +51,14 @@ frame_progress = 0.711623
 
 [node name="DamageSystem" parent="." index="1"]
 can_deal_damage = false
-max_health = 300
+max_health = 300.0
 
 [node name="CollisionShape2D" parent="DamageSystem" index="0"]
 visible = false
 shape = SubResource("CapsuleShape2D_whbdu")
+
+[node name="Marker2D" type="Marker2D" parent="DamageSystem" index="1"]
+position = Vector2(-61, -46)
 
 [node name="MovementComponent" parent="." index="2"]
 acceleration = 1500

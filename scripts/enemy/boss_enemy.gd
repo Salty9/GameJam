@@ -2,6 +2,7 @@ extends Character
 
 
 func _ready()->void:
+	super._ready()
 	$DamageSystem.health_changed.connect(on_health_changed)
 	
 func on_health_changed(_new_health)->void:
