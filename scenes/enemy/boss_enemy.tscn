@@ -51,7 +51,7 @@ autoplay = "default"
 frame_progress = 0.406646
 
 [node name="DamageSystem" parent="." index="1"]
-max_health = 1000.0
+max_health = 3000.0
 damage = 50
 
 [node name="CollisionShape2D" parent="DamageSystem" index="0"]

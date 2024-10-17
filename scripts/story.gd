@@ -56,7 +56,7 @@ func show_story_text(index:int):
 		$Label.text = array[i]
 		tween.tween_property($Label,"modulate:a",1,1)
 		if i < array.size()-1:
-			tween.tween_interval(array[i].length()/10.0)
+			tween.tween_interval(array[i].length()/15.0)
 			tween.tween_property($Label,"modulate:a",0,1)
 		await tween.finished
 		tween.stop()
