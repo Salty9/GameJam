@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://scripts/enemy/boss_enemy_state_machine.gd" id="5_kmdec"]
 [ext_resource type="Script" path="res://scripts/enemy/boss_enemy_charge.gd" id="5_p5yvo"]
 [ext_resource type="Script" path="res://scripts/enemy/boss_enemy_attack.gd" id="6_eyal5"]
-[ext_resource type="PackedScene" path="res://scenes/axe.tscn" id="7_d0sn1"]
+[ext_resource type="PackedScene" uid="uid://cgt0h7hdcbhjs" path="res://scenes/axe.tscn" id="7_d0sn1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jgwgi"]
 resource_local_to_scene = true

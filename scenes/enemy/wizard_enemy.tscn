@@ -40,6 +40,7 @@ height = 74.0
 size = Vector2(64, 64)
 
 [node name="WizardEnemy" instance=ExtResource("1_4vfbv")]
+collision_layer = 3
 script = ExtResource("2_r1q5m")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]

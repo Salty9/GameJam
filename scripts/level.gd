@@ -62,9 +62,9 @@ func boss_revealed()->void:
 	for child in get_children():
 		if child is AudioPlayer:
 			child.stop()
-	$AudioStream.stop()
-	$AudioStream.stream = load("res://assets/audio/boss-fight60s.mp3")
-	$AudioStream.play()
+	$AudioStreamPlayer.stop()
+	$AudioStreamPlayer.stream = load("res://assets/audio/boss-fight60s.mp3")
+	$AudioStreamPlayer.play()
 	
 
 func on_player_death()->void:
