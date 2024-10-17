@@ -2,6 +2,8 @@ extends Control
 
 
 func show_final_poster()->void:
+	$AudioStreamPlayer.play()
+	$AudioStreamPlayer.finished.connect($AudioStreamPlayer.play)
 	var tween:Tween = get_tree().create_tween()
 	tween.tween_property(self,"modulate:a",1,2)
 	await tween.finished
