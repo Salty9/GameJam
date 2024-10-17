@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7h3f7n2w2lan"]
+
+[ext_resource type="Script" path="res://scripts/main_control.gd" id="1_fwkbf"]
+[ext_resource type="FontFile" uid="uid://d3sf1su1avyn" path="res://assets/font/kenney_mini_square.ttf" id="2_sgwtp"]
+[ext_resource type="AudioStream" uid="uid://c1eoc2m8idipb" path="res://assets/audio/story-bgm.mp3" id="3_sdpji"]
+
+[node name="Story" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fwkbf")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -83.0
+offset_right = 300.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("2_sgwtp")
+theme_override_font_sizes/font_size = 42
+text = "The village of Lumindell used to be a peaceful village. Everyone going about their own day like usual."
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_sdpji")
+volume_db = -20.0
