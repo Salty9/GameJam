@@ -10,7 +10,7 @@ func _ready()->void:
 
 
 func on_statue_broken()->void:
-	GlobalAudioServer.play_audio("res://assets/audio/fountain_broking.wav",global_position)
+	GlobalAudioServer.play_audio("res://assets/audio/fountain_breaking.wav",global_position)
 	$Sprite2D.show()
 	statue_broken.emit()
 	health_bar.hide()
