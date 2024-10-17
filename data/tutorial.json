@@ -1,5 +1,6 @@
 [
 	"use w, a, s, d to move",
 	"left click to attack",
-	"left-shift to block"
+	"left-shift to block enemy attacks",
+	"break the guarded fountains"
 ]

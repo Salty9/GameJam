@@ -1,5 +1,12 @@
 extends "res://scripts/player/basic_player.gd"
 
+func _ready()->void:
+	super._ready()
+	$Axe.axe_count_changed.connect(on_axe_count_changed)
+	%AxeCountLabel.text = "x"+str($Axe.axe_count)
+
+func on_axe_count_changed()->void:
+	%AxeCountLabel.text = "x"+str($Axe.axe_count)
 
 func _process(delta: float) -> void:
 	super._process(delta)

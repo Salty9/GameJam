@@ -4,9 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://c7h3f7n2w2lan" path="res://scenes/story.tscn" id="1_uvrhv"]
 [ext_resource type="Script" path="res://scripts/level_transition.gd" id="2_jotxe"]
 [ext_resource type="FontFile" uid="uid://d3sf1su1avyn" path="res://assets/font/kenney_mini_square.ttf" id="3_5onx8"]
+[ext_resource type="Texture2D" uid="uid://5dsod1kpt00r" path="res://assets/Title screen/bg1.png" id="4_ijq1t"]
 [ext_resource type="Script" path="res://scripts/title_screen.gd" id="5_hkwg0"]
 [ext_resource type="AudioStream" uid="uid://dp7a12uimp3eu" path="res://assets/audio/title_bgm_cut.mp3" id="6_60uup"]
-[ext_resource type="Texture2D" uid="uid://ftgbgsci3f8n" path="res://assets/posters/Title screen/Title screen.png" id="6_opayq"]
 [ext_resource type="PackedScene" uid="uid://chytuw41ovv2s" path="res://scenes/final.tscn" id="7_c51ds"]
 
 [node name="Main" type="Node"]
@@ -30,7 +30,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("6_opayq")
+texture = ExtResource("4_ijq1t")
 expand_mode = 2
 
 [node name="Label" type="Label" parent="TitleScreen"]

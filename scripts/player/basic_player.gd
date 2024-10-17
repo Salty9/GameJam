@@ -1,7 +1,10 @@
 extends "res://scripts/character.gd"
 
-
-#var level2 :bool= false
+signal died_count_changed
+var died:int:
+	set(value):
+		died = value
+		died_count_changed.emit()
 
 var accept_input:bool =true
 var enabled_weapon:Node2D:
@@ -17,8 +20,12 @@ func _ready()->void:
 	$PlayerShield.defended.connect(on_player_defense)
 	$PlayerShield.defense_timeout.connect(on_player_defense_timeout)
 	enabled_weapon = $Sword
-	
-	
+	died_count_changed.connect(on_died_count_changed)
+	died = 0
+
+func on_died_count_changed()->void:
+	%DeathCountLabel.text = "heroes fallen: "+str(died)
+
 func on_player_defense_timeout():
 	enabled_weapon.show()
 func on_player_defense():
@@ -55,6 +62,7 @@ func _process(delta: float) -> void:
 
 
 func die():
+	died += 1
 	
 	GlobalAudioServer.play_audio("res://assets/audio/player_dead.wav",global_position)
 	
@@ -64,3 +72,4 @@ func die():
 	enabled_weapon.hide()
 	$PlayerShield.hide()
 	remove_from_group("player_group")
+	

@@ -2,10 +2,6 @@ extends DamageSystem
 
 signal statue_broken
 
-
-
-
-
 func _ready()->void:
 	super._ready()
 	no_health_remaining.connect(on_statue_broken)

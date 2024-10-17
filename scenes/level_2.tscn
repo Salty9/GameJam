@@ -317,4 +317,7 @@ volume_db = -20.0
 autoplay = true
 
 [node name="BasicPlayer2" parent="." instance=ExtResource("10_t41g4")]
-position = Vector2(2021, 1869)
+position = Vector2(2013, 1833)
+
+[node name="BossEnemySpawnMarker" type="Marker2D" parent="."]
+position = Vector2(1472, 280)
