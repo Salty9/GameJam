@@ -37,6 +37,8 @@ damage = 300
 
 [node name="Axe" parent="." index="7" instance=ExtResource("5_3ukmp")]
 visible = false
+max_count = 5
+axe_pickup_radius = 40
 
 [node name="DeathCountLabel" parent="HUD" index="0"]
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
