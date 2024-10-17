@@ -93,7 +93,7 @@ position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_ojfuj")
 
 [node name="RightAxe" parent="." index="5" instance=ExtResource("7_d0sn1")]
-max_count = 2
+max_count = 5
 axe_pickup_radius = 100
 cooldown_time = 1.0
 
@@ -101,7 +101,7 @@ cooldown_time = 1.0
 offset = Vector2(20, 0)
 
 [node name="LeftAxe" parent="." index="6" instance=ExtResource("7_d0sn1")]
-max_count = 2
+max_count = 5
 axe_pickup_radius = 100
 cooldown_time = 1.0
 

@@ -3,6 +3,7 @@ extends Node2D
 @export var max_count:int = 1
 @export var axe_pickup_radius:int = 50
 
+
 signal axe_count_changed
 signal thrown(thrown_axe:Projectile)
 
@@ -19,10 +20,10 @@ var axe_count:int:
 		var prev = axe_count
 		axe_count = max(0,min(value,max_count))
 		if prev != axe_count:
-			axe_count_changed.emit(axe_count)
-
+			axe_count_changed.emit()
 
 signal cooldown_time_changed
+
 @export var cooldown_time :float = 0.6:
 	set(value):
 		cooldown_time = value
@@ -65,7 +66,7 @@ func on_axe_thrown(axe:Projectile)->void:
 	axe_count -= 1
 
 
-func on_axe_count_changed(_new_value:int):
+func on_axe_count_changed():
 	$Pivot/Sprite2D.visible = axe_count > 0
 
 	
