@@ -7,11 +7,14 @@ func show_final_poster()->void:
 	await tween.finished
 	tween.stop()
 	tween.kill()
-	for text in Texts.story_texts["7"]:
+	for i in range( Texts.story_texts["7"].size()):
+		var text  = Texts.story_texts["7"][i]
 		var text_tween :Tween = get_tree().create_tween()
+		$Label.text = text
 		text_tween.tween_property($Label,"modulate:a",1,1)
 		text_tween.tween_interval(text.length()/10.0)
-		text_tween.tween_property($Label,"modulate:a",0,1)
+		if i <  Texts.story_texts["7"].size()-1:
+			text_tween.tween_property($Label,"modulate:a",0,1)
 		await text_tween.finished
 		text_tween.stop()
 		text_tween.kill()

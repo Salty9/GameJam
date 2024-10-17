@@ -9,6 +9,10 @@ var checkpoint_count:int=0
 
 @export var player:Character
 
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("debug"):
+		level_complete.emit()
+
 func _ready()->void:
 	player.dead.connect(on_player_death)
 

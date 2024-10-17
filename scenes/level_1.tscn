@@ -235,6 +235,18 @@ position = Vector2(72, 144)
 position = Vector2(264, 55)
 collision_mask = 1
 
+[node name="WizardEnemy6" parent="Checkpoints/CheckpointStatue3" instance=ExtResource("5_elxo5")]
+position = Vector2(-185, 241)
+collision_mask = 1
+
+[node name="WizardEnemy7" parent="Checkpoints/CheckpointStatue3" instance=ExtResource("5_elxo5")]
+position = Vector2(-230, -53)
+collision_mask = 1
+
+[node name="WizardEnemy8" parent="Checkpoints/CheckpointStatue3" instance=ExtResource("5_elxo5")]
+position = Vector2(94, -140)
+collision_mask = 1
+
 [node name="BorderMarkers" type="Node2D" parent="."]
 
 [node name="TopLeft" type="Marker2D" parent="BorderMarkers"]

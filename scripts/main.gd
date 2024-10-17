@@ -21,8 +21,7 @@ func on_story_showed()->void:
 
 func load_level(level_index:int=0)->void:
 	loaded_level_index = level_index
-	if loaded_level != null:
-		loaded_level.queue_free()
+
 	var level = levels[level_index].instantiate()
 	
 	level.modulate.a = 0
@@ -40,12 +39,12 @@ func load_level(level_index:int=0)->void:
 func on_level_complete()->void:
 	if loaded_level != null:
 		var tween:Tween = get_tree().create_tween()
-		tween.tween_property(loaded_level,"modulate:a",0,2)
+		tween.tween_property(loaded_level,"modulate:a",0,1)
 		await tween.finished
 		tween.stop()
 		tween.kill()
+		loaded_level.queue_free()
 	if loaded_level_index == 0:
-		
 		
 		$LevelTransition.show_transition()
 		$LevelTransition.key_pressed.connect(on_level_transition_showed)

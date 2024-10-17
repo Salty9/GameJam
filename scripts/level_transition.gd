@@ -15,14 +15,13 @@ func _process(delta: float) -> void:
 	
 
 func show_transition()->void:
-	modulate.a = 0
 	continued = false
-	
 	
 	await get_tree().create_tween().tween_property(self,"modulate:a",1,1).finished
 	
 	
 	tween = get_tree().create_tween()
+	
 	
 	tween.tween_property($LowerLabel,"modulate:a",1,0.5)
 	tween.tween_property($LowerLabel,"modulate:a",0,0.5)

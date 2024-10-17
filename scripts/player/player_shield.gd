@@ -21,6 +21,7 @@ func _ready() -> void:
 func on_shield_took_damage(damage:int):
 	if not $DefenseTimer.is_stopped():
 		$Sprite2D/CPUParticles2D.emitting=true
+		GlobalAudioServer.play_audio("res://assets/audio/shield.wav",global_position)
 
 func defend()->void:
 	if $Timer.is_stopped():
