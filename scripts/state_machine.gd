@@ -4,7 +4,7 @@ extends Node2D
 
 class_name StateMachine
 
-#var states:Array[State]
+var states:Array[State]
 
 signal state_changed
 
@@ -33,7 +33,7 @@ func _ready() ->void:
 			child_state.state_exited.connect(on_state_exited)
 			child_state.object = parent
 			child.object_movement_component = parent_movement_component
-			#states.append(child_state)
+			states.append(child_state)
 	if initial_state != null:
 		change_state(initial_state)
 

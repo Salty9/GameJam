@@ -3,7 +3,9 @@ extends State
 
 @export var axes:Array[Node2D]
 
-@export var cooldown_time:float = 2
+@export var cooldown_time:float = 1
+
+
 
 func _ready():
 	super._ready()
@@ -17,9 +19,12 @@ func on_axe_thrown(thrown_axe:Projectile):
 
 func enter():
 	super.enter()
+	if object_movement_component != null:
+		object_movement_component.normalized_dir = Vector2.ZERO
 	$Timer.wait_time = cooldown_time
 	for axe in axes:
 		axe.visible = true
+
 
 
 func throw_axe():

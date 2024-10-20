@@ -26,3 +26,4 @@ func on_state_exited(state_name:String)->void:
 		$"../AnimatedSprite2D".material.set_shader_parameter("enalbled",false)
 	else:
 		$"../AnimatedSprite2D".material.set_shader_parameter("enalbled",true)
+	

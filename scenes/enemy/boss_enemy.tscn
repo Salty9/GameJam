@@ -52,7 +52,7 @@ frame_progress = 0.406646
 
 [node name="DamageSystem" parent="." index="1"]
 max_health = 3000.0
-damage = 50
+damage = 200
 
 [node name="CollisionShape2D" parent="DamageSystem" index="0"]
 visible = false
@@ -68,7 +68,7 @@ friction = 1000
 
 [node name="StateMachine" parent="." index="3" node_paths=PackedStringArray("initial_state", "parent_movement_component")]
 script = ExtResource("5_kmdec")
-attack_range = 500
+attack_range = 400
 initial_state = NodePath("Attack")
 parent_movement_component = NodePath("../MovementComponent")
 
@@ -93,7 +93,7 @@ position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_ojfuj")
 
 [node name="RightAxe" parent="." index="5" instance=ExtResource("7_d0sn1")]
-max_count = 5
+max_count = 100
 axe_pickup_radius = 100
 cooldown_time = 1.0
 
@@ -101,7 +101,7 @@ cooldown_time = 1.0
 offset = Vector2(20, 0)
 
 [node name="LeftAxe" parent="." index="6" instance=ExtResource("7_d0sn1")]
-max_count = 5
+max_count = 100
 axe_pickup_radius = 100
 cooldown_time = 1.0
 
