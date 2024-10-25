@@ -37,7 +37,7 @@ radius = 34.0
 height = 74.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mgwn2"]
-size = Vector2(64, 64)
+size = Vector2(55, 60)
 
 [node name="WizardEnemy" instance=ExtResource("1_4vfbv")]
 collision_layer = 3
@@ -94,7 +94,7 @@ script = ExtResource("7_3yut7")
 autostart = true
 
 [node name="CollisionShape2D" parent="." index="4"]
-visible = false
+position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_mgwn2")
 
 [node name="Stick" type="Sprite2D" parent="." index="5"]

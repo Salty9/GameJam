@@ -62,6 +62,7 @@ func _process(delta: float) -> void:
 
 
 func die():
+	$AnimatedSprite2D.material.set_shader_parameter("enabled",false)
 	died += 1
 	
 	GlobalAudioServer.play_audio("res://assets/audio/player_dead.wav",global_position)

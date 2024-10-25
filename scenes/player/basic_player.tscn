@@ -11,7 +11,7 @@
 radius = 35.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ujukf"]
-size = Vector2(52, 60)
+size = Vector2(49, 57)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_77ggd"]
 shader = ExtResource("4_xnukm")
@@ -31,7 +31,6 @@ debug_color = Color(0.888448, 0.000271842, 0.79902, 0.42)
 position = Vector2(-64, -64)
 
 [node name="CollisionShape2D" parent="." index="2"]
-position = Vector2(2, 2)
 shape = SubResource("RectangleShape2D_ujukf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="4"]
